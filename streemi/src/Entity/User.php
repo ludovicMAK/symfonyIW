@@ -41,10 +41,31 @@ class User
     #[ORM\OneToMany(targetEntity: Playlist::class, mappedBy: 'createdBy')]
     private Collection $playlists;
 
+    /**
+     * @var Collection<int, PlaylistSubcription>
+     */
+    #[ORM\OneToMany(targetEntity: PlaylistSubcription::class, mappedBy: 'subscriber')]
+    private Collection $playlistSubcriptions;
+
+    /**
+     * @var Collection<int, Subscription>
+     */
+    #[ORM\OneToMany(targetEntity: Subscription::class, mappedBy: 'subcriber')]
+    private Collection $subscriptions;
+
+    /**
+     * @var Collection<int, SubscriptionHistory>
+     */
+    #[ORM\OneToMany(targetEntity: SubscriptionHistory::class, mappedBy: 'subcriber')]
+    private Collection $subscriptionHistories;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->playlists = new ArrayCollection();
+        $this->playlistSubcriptions = new ArrayCollection();
+        $this->subscriptions = new ArrayCollection();
+        $this->subscriptionHistories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -154,6 +175,96 @@ class User
             // set the owning side to null (unless already changed)
             if ($playlist->getCreatedBy() === $this) {
                 $playlist->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PlaylistSubcription>
+     */
+    public function getPlaylistSubcriptions(): Collection
+    {
+        return $this->playlistSubcriptions;
+    }
+
+    public function addPlaylistSubcription(PlaylistSubcription $playlistSubcription): static
+    {
+        if (!$this->playlistSubcriptions->contains($playlistSubcription)) {
+            $this->playlistSubcriptions->add($playlistSubcription);
+            $playlistSubcription->setSubscriber($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlaylistSubcription(PlaylistSubcription $playlistSubcription): static
+    {
+        if ($this->playlistSubcriptions->removeElement($playlistSubcription)) {
+            // set the owning side to null (unless already changed)
+            if ($playlistSubcription->getSubscriber() === $this) {
+                $playlistSubcription->setSubscriber(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Subscription>
+     */
+    public function getSubscriptions(): Collection
+    {
+        return $this->subscriptions;
+    }
+
+    public function addSubscription(Subscription $subscription): static
+    {
+        if (!$this->subscriptions->contains($subscription)) {
+            $this->subscriptions->add($subscription);
+            $subscription->setSubcriber($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubscription(Subscription $subscription): static
+    {
+        if ($this->subscriptions->removeElement($subscription)) {
+            // set the owning side to null (unless already changed)
+            if ($subscription->getSubcriber() === $this) {
+                $subscription->setSubcriber(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SubscriptionHistory>
+     */
+    public function getSubscriptionHistories(): Collection
+    {
+        return $this->subscriptionHistories;
+    }
+
+    public function addSubscriptionHistory(SubscriptionHistory $subscriptionHistory): static
+    {
+        if (!$this->subscriptionHistories->contains($subscriptionHistory)) {
+            $this->subscriptionHistories->add($subscriptionHistory);
+            $subscriptionHistory->setSubcriber($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubscriptionHistory(SubscriptionHistory $subscriptionHistory): static
+    {
+        if ($this->subscriptionHistories->removeElement($subscriptionHistory)) {
+            // set the owning side to null (unless already changed)
+            if ($subscriptionHistory->getSubcriber() === $this) {
+                $subscriptionHistory->setSubcriber(null);
             }
         }
 

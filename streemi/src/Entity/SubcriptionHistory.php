@@ -20,6 +20,10 @@ class SubcriptionHistory
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $endDate = null;
 
+    #[ORM\ManyToOne(inversedBy: 'subcriptionHistories')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?subscription $subcription = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +49,18 @@ class SubcriptionHistory
     public function setEndDate(\DateTimeInterface $endDate): static
     {
         $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    public function getSubcription(): ?subscription
+    {
+        return $this->subcription;
+    }
+
+    public function setSubcription(?subscription $subcription): static
+    {
+        $this->subcription = $subcription;
 
         return $this;
     }

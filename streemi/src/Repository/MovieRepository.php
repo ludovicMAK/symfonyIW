@@ -2,39 +2,39 @@
 
 namespace App\Repository;
 
-use App\Entity\Seasons;
+use App\Entity\Movie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Seasons>
+ * @extends ServiceEntityRepository<Movie>
  */
-class SeasonsRepository extends ServiceEntityRepository
+class MovieRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Seasons::class);
+        parent::__construct($registry, Movie::class);
     }
 
 //    /**
-//     * @return Seasons[] Returns an array of Seasons objects
+//     * @return Movie[] Returns an array of Movie objects
 //     */
 //    public function findByExampleField($value): array
 //    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
+//        return $this->createQueryBuilder('m')
+//            ->andWhere('m.exampleField = :val')
 //            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
+//            ->orderBy('m.id', 'ASC')
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Seasons
+//    public function findOneBySomeField($value): ?Movie
 //    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
+//        return $this->createQueryBuilder('m')
+//            ->andWhere('m.exampleField = :val')
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()
