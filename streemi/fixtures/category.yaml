@@ -1,0 +1,4 @@
+App\Entity\Category:
+  categorie_action:
+    name: 'Action'
+    label: 'Description 1'

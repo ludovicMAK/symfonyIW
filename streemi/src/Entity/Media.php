@@ -66,7 +66,7 @@ class Media
     /**
      * @var Collection<int, categorie>
      */
-    #[ORM\ManyToMany(targetEntity: categorie::class, inversedBy: 'media')]
+    #[ORM\ManyToMany(targetEntity: category::class, inversedBy: 'media')]
     private Collection $category;
 
     /**
@@ -239,7 +239,7 @@ class Media
         return $this->category;
     }
 
-    public function addCategory(categorie $category): static
+    public function addCategory(category $category): static
     {
         if (!$this->category->contains($category)) {
             $this->category->add($category);
@@ -248,7 +248,7 @@ class Media
         return $this;
     }
 
-    public function removeCategory(categorie $category): static
+    public function removeCategory(category $category): static
     {
         $this->category->removeElement($category);
 
