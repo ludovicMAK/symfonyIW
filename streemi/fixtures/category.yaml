@@ -1,4 +1,13 @@
 App\Entity\Category:
   categorie_action:
     name: 'Action'
-    label: 'Description 1'
+    label: 'Action'
+  categorie_adventure:
+    name: 'Adventure'
+    label: 'Adventure'
+  categorie_animation:
+    name: 'Animation'
+    label: 'Animation'
+  categorie_comedy:
+    name: 'Comedy'
+    label: 'Comedy'

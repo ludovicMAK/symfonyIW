@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Enum\MediaTypeStatusEnum;
 use App\Repository\MediaRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -27,8 +26,6 @@ class Media
     {
         return $this->id;
     }
-    #[ORM\Column(enumType: MediaTypeStatusEnum::class)]
-    private ?MediaTypeStatusEnum $mediaTypeStatus = null;
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
@@ -80,17 +77,6 @@ class Media
         $this->serie = new ArrayCollection();
         $this->category = new ArrayCollection();
         $this->media = new ArrayCollection();
-    }
-    public function getMediaTypeStatus(): ?MediaTypeStatusEnum
-    {
-        return $this->mediaTypeStatus;
-    }
-
-    public function setMediaTypeStatus(MediaTypeStatusEnum $mediaTypeStatus): static
-    {
-        $this->mediaTypeStatus = $mediaTypeStatus;
-
-        return $this;
     }
 
     public function getTitle(): ?string

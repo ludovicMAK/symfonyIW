@@ -1,0 +1,13 @@
+App\Entity\Serie:
+  serie_{1..10}:
+    title: <text(20)>
+    shortDescription: <text(20)>
+    longDescription: <text(200)>
+    releaseDate: <dateTimeBetween('-30 years', 'now')>
+    coverImage: <imageUrl(640, 480)>
+    
+App\Entity\Season:
+  season{1..10}:
+    seasonNumber: <numberBetween(1, 10)>
+    serie: '@serie*'
+    
