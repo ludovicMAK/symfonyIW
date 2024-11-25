@@ -1,8 +1,0 @@
-App\Entity\Movie:
-  movie{1..10}:
-    title: <title()>
-    shortDescription: <text(20)>
-    longDescription: <text(200)>
-    releaseDate: <dateTimeBetween('-30 years', 'now')>
-    coverImage: <imageUrl(640, 480)>
-    
