@@ -12,6 +12,7 @@ class SubscriptionHistoryFixture extends Fixture implements DependentFixtureInte
     public function load(ObjectManager $manager): void
     {
         $subscriptionHistory = new SubscriptionHistory();
+        
         $subscriptionHistory->setSubcriber($this->getReference('user_0'));
         $subscriptionHistory->setSubscription($this->getReference('subscription_0'));
         $subscriptionHistory->setStartDate(new \DateTime());

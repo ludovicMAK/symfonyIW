@@ -19,7 +19,9 @@ class EpisodeFixture extends Fixture implements DependentFixtureInterface
         foreach ($episodes as $index => $data) {
             $episode = new Episode();
             $episode->setTitle($data['title']);
+            $episode->setDuration(42);
             $episode->setSeason($this->getReference($data['season']));
+            $episode->setReleaseDate(new \DateTimeImmutable());
             $manager->persist($episode);
         }
 

@@ -31,7 +31,7 @@ class Subscription
     /**
      * @var Collection<int, SubcriptionHistory>
      */
-    #[ORM\OneToMany(targetEntity: SubcriptionHistory::class, mappedBy: 'subcription', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: SubscriptionHistory::class, mappedBy: 'subcription', orphanRemoval: true)]
     private Collection $subcriptionHistories;
 
     /**
@@ -107,22 +107,22 @@ class Subscription
         return $this->subcriptionHistories;
     }
 
-    public function addSubcriptionHistory(SubcriptionHistory $subcriptionHistory): static
+    public function addSubcriptionHistory(SubscriptionHistory $subcriptionHistory): static
     {
         if (!$this->subcriptionHistories->contains($subcriptionHistory)) {
             $this->subcriptionHistories->add($subcriptionHistory);
-            $subcriptionHistory->setSubcription($this);
+            $subcriptionHistory->setSubscription($this);
         }
 
         return $this;
     }
 
-    public function removeSubcriptionHistory(SubcriptionHistory $subcriptionHistory): static
+    public function removeSubcriptionHistory(SubscriptionHistory $subcriptionHistory): static
     {
         if ($this->subcriptionHistories->removeElement($subcriptionHistory)) {
             // set the owning side to null (unless already changed)
-            if ($subcriptionHistory->getSubcription() === $this) {
-                $subcriptionHistory->setSubcription(null);
+            if ($subcriptionHistory->getSubscription() === $this) {
+                $subcriptionHistory->setSubscription(null);
             }
         }
 

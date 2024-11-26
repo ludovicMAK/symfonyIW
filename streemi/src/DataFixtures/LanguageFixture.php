@@ -10,11 +10,18 @@ class LanguageFixture extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $languages = ['English', 'French', 'Spanish', 'German', 'Japanese'];
+        $languages = [
+            ['name' => 'English', 'code' => 'en'],
+            ['name' => 'French', 'code' => 'fr'],
+            ['name' => 'Spanish', 'code' => 'es'],
+            ['name' => 'German', 'code' => 'de'],
+            ['name' => 'Japanese', 'code' => 'ja'],
+        ];
 
-        foreach ($languages as $index => $name) {
+        foreach ($languages as $index => $data) {
             $language = new Language();
-            $language->setName($name);
+            $language->setName($data['name']);
+            $language->setCode($data['code']);
             $manager->persist($language);
 
             // Add reference for other fixtures

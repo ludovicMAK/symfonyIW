@@ -19,7 +19,9 @@ class PlaylistFixture extends Fixture implements DependentFixtureInterface
         foreach ($playlists as $index => $data) {
             $playlist = new Playlist();
             $playlist->setName($data['name']);
+            $playlist->setCreatedAt(new \DateTimeImmutable());
             $playlist->setCreatedBy($this->getReference($data['user']));
+            $playlist->setUpdatedAt(new \DateTimeImmutable());
             $manager->persist($playlist);
 
             $this->addReference('playlist_' . $index, $playlist);
