@@ -57,19 +57,19 @@ class Media
     /**
      * @var Collection<int, season>
      */
-    #[ORM\ManyToMany(targetEntity: season::class, inversedBy: 'media')]
+    #[ORM\ManyToMany(targetEntity: Season::class, inversedBy: 'media')]
     private Collection $serie;
 
     /**
      * @var Collection<int, categorie>
      */
-    #[ORM\ManyToMany(targetEntity: category::class, inversedBy: 'media')]
+    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'media')]
     private Collection $category;
 
     /**
      * @var Collection<int, language>
      */
-    #[ORM\ManyToMany(targetEntity: language::class, inversedBy: 'media')]
+    #[ORM\ManyToMany(targetEntity: Language::class, inversedBy: 'media')]
     private Collection $media;
     public function __construct()
     {

@@ -18,11 +18,11 @@ class PlaylistSubcription
 
     #[ORM\ManyToOne(inversedBy: 'playlistSubcriptions')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?playlist $playlist = null;
+    private ?Playlist $playlist = null;
 
     #[ORM\ManyToOne(inversedBy: 'playlistSubcriptions')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $subscriber = null;
+    private ?User $subscriber = null;
 
     public function getId(): ?int
     {
@@ -41,24 +41,24 @@ class PlaylistSubcription
         return $this;
     }
 
-    public function getPlaylist(): ?playlist
+    public function getPlaylist(): ?Playlist
     {
         return $this->playlist;
     }
 
-    public function setPlaylist(?playlist $playlist): static
+    public function setPlaylist(?Playlist $playlist): static
     {
         $this->playlist = $playlist;
 
         return $this;
     }
 
-    public function getSubscriber(): ?user
+    public function getSubscriber(): ?User
     {
         return $this->subscriber;
     }
 
-    public function setSubscriber(?user $subscriber): static
+    public function setSubscriber(?User $subscriber): static
     {
         $this->subscriber = $subscriber;
 

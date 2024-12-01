@@ -27,7 +27,7 @@ class Season
     /**
      * @var Collection<int, episode>
      */
-    #[ORM\OneToMany(targetEntity: episode::class, mappedBy: 'season')]
+    #[ORM\OneToMany(targetEntity: Episode::class, mappedBy: 'season')]
     private Collection $season;
 
     public function __construct()
