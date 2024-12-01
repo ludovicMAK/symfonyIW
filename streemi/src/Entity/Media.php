@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\MediaTypeStatusEnum;
 use App\Repository\MediaRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,8 +14,8 @@ use Doctrine\ORM\Mapping\InheritanceType;
 
 #[ORM\Entity(repositoryClass: MediaRepository::class)]
 #[InheritanceType('JOINED')]
-#[DiscriminatorColumn(name: 'mediaType', type: 'string')]
-#[DiscriminatorMap(['movie' => Movie::class, 'serie' => Serie::class])]
+#[DiscriminatorColumn(name: 'mediaType', type: 'mediaType')]
+#[DiscriminatorMap([MediaTypeStatusEnum::MOVIE->value => Movie::class, MediaTypeStatusEnum::SERIE->value => Serie::class])]
 class Media
 {
     #[ORM\Id]
@@ -264,6 +265,4 @@ class Media
 
         return $this;
     }
-
-    
 }
