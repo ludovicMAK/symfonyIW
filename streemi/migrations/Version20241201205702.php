@@ -17,7 +17,7 @@ final class Version20241201205702 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->addSql('ALTER TABLE media CHANGE mediaType mediaType ENUM(\'movie\', \'serie\') NOT NULL');
+        $this->addSql('ALTER TABLE media CHANGE mediaType mediaType ENUM(\'Films\', \'Séries\') NOT NULL');
     }
 
     public function down(Schema $schema): void
