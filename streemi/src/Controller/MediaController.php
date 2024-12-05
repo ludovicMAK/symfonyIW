@@ -23,26 +23,26 @@ class MediaController extends AbstractController
     {
         return $this->render('movie/detail.html.twig');
     }
-    #[Route('/discover/{mediaTypeStatusEnum?MediaTypeStatusEnum}', name: 'app_movie_discover')]
+    #[Route('/discover/{mediaType?MediaTypeStatusEnum}', name: 'app_movie_discover')]
     public function discover(
         CategoryRepository $categoryRepository,
         MovieRepository $movieRepository,
         SerieRepository $serieRepository,
-        string $mediaTypeStatusEnum = MediaTypeStatusEnum::MOVIE->value,
+        string $mediaType = MediaTypeStatusEnum::MOVIE->value,
     ): Response {
         $categories = $categoryRepository->findAll();
-        $medias = $mediaTypeStatusEnum === MediaTypeStatusEnum::MOVIE->value
+        $medias = $mediaType === MediaTypeStatusEnum::MOVIE->value
             ? $movieRepository->findAll()
             : $serieRepository->findAll();
         return $this->render('movie/discover.html.twig', ['medias' => $medias, 'categories' => $categories]);
     }
-    #[Route('/{mediaTypeStatusEnum?MediaTypeStatusEnum}', name: 'app_movie')]
+    #[Route('/accueil', name: 'app_movie')]
     public function index(
         MovieRepository $movieRepository,
         SerieRepository $serieRepository,
-        string $mediaTypeStatusEnum = MediaTypeStatusEnum::MOVIE->value,
+        string $mediaType = MediaTypeStatusEnum::MOVIE->value,
     ): Response {
-        $medias = $mediaTypeStatusEnum === MediaTypeStatusEnum::MOVIE->value
+        $medias = $mediaType === MediaTypeStatusEnum::MOVIE->value
             ? $movieRepository->findAll()
             : $serieRepository->findAll();
         return $this->render('movie/index.html.twig', ['medias' => $medias]);
