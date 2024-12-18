@@ -1,7 +1,5 @@
 doctrine:
   dbal:
-    types:
-      mediaType: App\DBAL\Types\EnumTypeMedia
     url: "%env(resolve:DATABASE_URL)%"
 
     # IMPORTANT: You MUST configure your server version,

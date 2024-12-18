@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping\InheritanceType;
 
 #[ORM\Entity(repositoryClass: MediaRepository::class)]
 #[InheritanceType('JOINED')]
-#[DiscriminatorColumn(name: 'mediaType', type: 'mediaType')]
+#[DiscriminatorColumn(name: 'mediaType', type: 'string')]
 #[DiscriminatorMap([MediaTypeStatusEnum::MOVIE->value => Movie::class, MediaTypeStatusEnum::SERIE->value => Serie::class])]
 class Media
 {

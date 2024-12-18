@@ -47,9 +47,4 @@ class MediaController extends AbstractController
             : $serieRepository->findAll();
         return $this->render('movie/index.html.twig', ['medias' => $medias]);
     }
-    #[Route('/movie/list', name: 'app_movie_list')]
-    public function list(): Response
-    {
-        return $this->render('movie/lists.html.twig');
-    }
 }
