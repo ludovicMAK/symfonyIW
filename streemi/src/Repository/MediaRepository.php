@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Media;
+use App\Entity\WatchHistory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -41,4 +42,15 @@ class MediaRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function findPopular(int $limit = 10): array
+{
+    return $this->createQueryBuilder('m')
+        ->leftJoin(WatchHistory::class, 'wh', 'WITH', 'wh.media = m.id')
+        ->select('m, COUNT(wh.id) AS HIDDEN viewCount')
+        ->groupBy('m.id')
+        ->orderBy('viewCount', 'DESC')
+        ->setMaxResults($limit)
+        ->getQuery()
+        ->getResult();
+}
 }

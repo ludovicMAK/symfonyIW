@@ -53,12 +53,14 @@ class MediaController extends AbstractController
         Request $request,
         MovieRepository $movieRepository,
         SerieRepository $serieRepository,
+        MediaRepository $mediaRepository
     ): Response {
         $mediaType = $request->query->get('mediaType', MediaTypeStatusEnum::MOVIE->value);
         $medias = $mediaType === MediaTypeStatusEnum::MOVIE->value
             ? $movieRepository->findAll()
             : $serieRepository->findAll();
-        return $this->render('movie/index.html.twig', ['medias' => $medias]);
+        $mediaPopular = $mediaRepository->findPopular();
+        return $this->render('movie/index.html.twig', ['medias' => $medias, 'mediaPopular' => $mediaPopular]);
     }
     
 }
