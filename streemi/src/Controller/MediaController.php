@@ -2,26 +2,38 @@
 
 namespace App\Controller;
 
+use App\Entity\Movie;
+use App\Entity\Serie;
 use App\Enum\MediaTypeStatusEnum;
 use App\Repository\CategoryRepository;
 use App\Repository\MediaRepository;
 use App\Repository\MovieRepository;
 use App\Repository\SerieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class MediaController extends AbstractController
 {
-    #[Route('/movie/detail-serie', name: 'app_movie_detail_serie')]
-    public function detailSerie(): Response
+
+    #[Route('/movie/detail/{id}', name: 'app_movie_detail')]
+    public function detail(
+        MediaRepository $mediaRepository,
+        MovieRepository $movieRepository,
+        SerieRepository $serieRepository,
+        int $id
+    ): Response
     {
-        return $this->render('movie/detail_serie.html.twig');
-    }
-    #[Route('/movie/detail', name: 'app_movie_detail')]
-    public function detail(): Response
-    {
-        return $this->render('movie/detail.html.twig');
+        $media = $mediaRepository->find($id);
+        if($media instanceof Movie) {
+            $media = $movieRepository->find($id);
+            return $this->render('movie/detail.html.twig', ['movie' => $media]);
+
+        } else if($media instanceof Serie) {
+            $media = $serieRepository->find($id);
+            return $this->render('movie/detail_serie.html.twig', ['serie' => $media]);
+        }
     }
     #[Route('/discover/{mediaType?MediaTypeStatusEnum}', name: 'app_movie_discover')]
     public function discover(
@@ -38,13 +50,15 @@ class MediaController extends AbstractController
     }
     #[Route('/accueil', name: 'app_movie')]
     public function index(
+        Request $request,
         MovieRepository $movieRepository,
         SerieRepository $serieRepository,
-        string $mediaType = MediaTypeStatusEnum::MOVIE->value,
     ): Response {
+        $mediaType = $request->query->get('mediaType', MediaTypeStatusEnum::MOVIE->value);
         $medias = $mediaType === MediaTypeStatusEnum::MOVIE->value
             ? $movieRepository->findAll()
             : $serieRepository->findAll();
         return $this->render('movie/index.html.twig', ['medias' => $medias]);
     }
+    
 }
